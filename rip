@@ -267,7 +267,7 @@ def main():
         options.audio = ','.join(tracks)
     else:
         audio_default = int(options.audio.split(',',1)[0])
-   
+
     if info and not options.subtitles:
         default = None
         if options.alang == options.slang:
@@ -368,6 +368,13 @@ def main():
                 merge.extend(['--default-track', subtitles_default])
             else:
                 for id in subtitles_tracks:
+                    # on Mac OS X we might get something like
+                    # "4 (track ID for mkvmerge & mkvextract: 3):0"
+                    # in that case, we trim it and keep only the digit
+                    idx = id.index(' (')
+                    if idx > -1:
+                        id = id[:idx]
+
                     merge.extend(['--default-track', '%s:0' % id])
 
         mktags(output_tags, options.title, options.dry_run)
