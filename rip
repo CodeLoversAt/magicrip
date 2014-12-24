@@ -49,6 +49,7 @@ LANGS = {
     'fr': 'fra',
     'es': 'spa',
     'ja': 'jpn',
+    'de': 'ger',
 }
 RLANG = dict((v,k) for k,v in LANGS.iteritems())
 
